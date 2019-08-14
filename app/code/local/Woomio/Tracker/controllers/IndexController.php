@@ -1,4 +1,9 @@
 <?php
+function indexcontroller_error_handler($errno, $errstr, $errfile, $errline, $errcontext) {
+    echo 'An error occurred in the woomio plugin. ' . $errno . ': ' . $errstr;
+    return true;
+}
+
 class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
     /**
      * @url orders: http://ec2-52-19-3-226.eu-west-1.compute.amazonaws.com/magento/woomio?type=orders
@@ -6,12 +11,16 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
     public function IndexAction() {
 	    		
 		$AllowedIP = gethostbyname('ping.woomio.com');
+
 		$GetParams = Mage::app()->getRequest()->getParams();
 		$woomioTable = Mage::getSingleton("core/resource")->getTableName('woomio');
 		
 		if($_SERVER['REMOTE_ADDR'] !== $AllowedIP) {
+            echo "Plugin error: 403";
 			die;
 		}
+
+        set_error_handler('indexcontroller_error_handler');
 
 		$hrs = ((isset($_GET['hrs']) && is_numeric($_GET['hrs'])) ? $_GET['hrs'] : null);
         $affiliated = (isset($_GET['affiliated']) && $_GET['affiliated'] === 'true');
@@ -55,8 +64,13 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
 		}
 		
 		echo json_encode($response);
+
+        restore_error_handler();
     }
 
+    /**
+     * /woomio?type=orders&
+     */
     function get_orders($affiliated, $id, $hrs) {
     	//If no orders return empty order array
         $orders = array();
