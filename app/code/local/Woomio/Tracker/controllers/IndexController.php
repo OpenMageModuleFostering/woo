@@ -22,21 +22,9 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
 				$response = new stdClass();
 				$response->orders = $this->get_orders($affiliated, $id, $hrs);
 				break;
-			
 			case 'customers':
-				$response = array();
-
-				if($id){
-					$Address 					= Mage::getModel('sales/order_address')->load($id);
-					$response['customers'][] 	= $Address->getData();
-				}
-				else{
-					$Addresses 					= Mage::getModel('sales/order_address')->getCollection()->addFieldToSelect('*')->addFieldToFilter('address_type', 'billing');
-					foreach($Addresses as $Address) {
-						$response['customers'][$Address->getId()] 	= $Address->getData();
-					}
-					unset($Address);
-				}
+				$response = new stdClass();
+                $response->customers = $this->get_customers($id);
 				break;
 			case 'products':
 				$response = array();
@@ -70,8 +58,6 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
     }
 
     function get_orders($affiliated, $id, $hrs) {
-    	global $wpdb;
-
     	//If no orders return empty order array
         $orders = array();
 
@@ -83,8 +69,8 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
 
     	$now = new DateTime(null, new DateTimeZone('UTC'));
 
-    	//Get orders
-    	$query = "SELECT entity_id, created_at, shipping_method, shipping_amount, shipping_tax_amount, order_currency_code, remote_ip, customer_is_guest, customer_id, customer_email, discount_amount, tax_amount, grand_total, shipping_address_id, billing_address_id";
+    	//Get orders, increment_id is the order id shown to shop owner and customer, entity_id is the order object id used in the database
+    	$query = "SELECT entity_id, created_at, status, shipping_method, shipping_amount, shipping_tax_amount, order_currency_code, remote_ip, customer_is_guest, customer_email, increment_id AS order_id, customer_id, discount_amount, tax_amount, grand_total, shipping_address_id, billing_address_id";
     	if($affiliated === true) {
     		$query .= ", wacsid";
     	}
@@ -94,16 +80,16 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
     	}
     	$query .= " WHERE entity_id >= 0"; //Always true condition to allow adding the other conditionals based on parameters
     	if($affiliated === true) {
-    		$query .= " AND entity_id=orderid";
+    		$query .= " AND increment_id = orderid";
     	}
     	if($id) {
-    		$query .= " AND entity_id = :id";
+    		$query .= " AND increment_id = :id";
     	}
     	if($hrs !== null) {
     		$now->sub(new DateInterval('PT' . $hrs . 'H'));
             $query .= " AND created_at >= :created_at";
     	}
-    	$query .= " ORDER BY entity_id;";
+    	$query .= " ORDER BY order_id;";
 
     	$query_binds = array();
     	if ($id && $hrs !== null) {
@@ -118,9 +104,12 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
         }
             
         $result = $read_connection->query($query, $query_binds);
+
         while($row = $result->fetch()) {
         	$order = new stdClass();
-        	$order->id = $row['entity_id'];
+            $order->id = $row['order_id'];
+            $order->entity_id = $row['entity_id'];
+            $order->status = $row['status'];
         	$order->time = $row['created_at'];
         	$order->items = array();
         	$order->shippings = array();
@@ -159,7 +148,7 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
         $address_query .= " WHERE t1.entity_id = :shipping_entity_id;";
 
         foreach($orders as $order) {
-        	$item_query_binds = array('order_id' => $order->id);
+        	$item_query_binds = array('order_id' => $order->entity_id);
         	//Get order items
         	$result = $read_connection->query($item_query, $item_query_binds);
         	$count = 0;
@@ -195,9 +184,9 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
         		$order->shippings[0]->shipping_company = $row['shipping_company'];
         		$order->shippings[0]->shipping_country = $row['shipping_country'];
 
-        		$order->billing_state = $row['billing_state'];
+        		$order->billing_region = $row['billing_region'];
         		$order->billing_postcode = $row['billing_postcode'];
-        		$order->billing_lastname = "";
+        		$order->billing_last_name = "";
         		if($row['billing_middlename'] !== null) {
         			$order->billing_last_name .= $row['billing_middlename'] . " ";
         		}
@@ -213,5 +202,51 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
         unset($order);
 
     	return $orders;
+    }
+
+    function get_customers($id) {
+        $customers = array();
+
+        $customers_collection = Mage::getModel('customer/customer')->getCollection()
+            ->addAttributeToSelect('email')
+            ->addAttributeToSelect('firstname')
+            ->addAttributeToSelect('lastname');
+
+        if($id) {
+            $customers_collection->addAttributeToFilter('entity_id', $id);
+        }
+
+        foreach ($customers_collection as $customer) {
+            $customerData = $customer->getData();
+            $customer = new stdClass();
+            $customer->id = $customerData['entity_id'];
+            $customer->first_name = $customerData['firstname'];
+            $customer->last_name = $customerData['lastname'];
+            $customer->email = $customerData['email'];
+
+
+            $customer_object = Mage::getModel('customer/customer')->load($customer->id);
+            $customer_addresses_array = $customer_object->getAddresses();
+            if(count($customer_addresses_array) > 0) {
+                foreach($customer_addresses_array as $customer_address) {
+                    $address_array = $customer_address->toArray();
+                    var_dump($address_array);
+                    echo "<br><br>";
+                    $customer->billing_address = $address_array['street'];
+                    $customer->billing_city = $address_array['city'];
+                    $customer->billing_postcode = $address_array['postcode'];
+                    if(isset($address_array['region'])) {
+                        $customer->billing_region = $address_array['region'];
+                    }
+                    $customer->billing_country = $address_array['country_id'];
+                    $customer->phone = $address_array['telephone'];
+                    break;
+                }
+            }
+
+            $customers[] = $customer;
+        }
+
+        return $customers;
     }
 }

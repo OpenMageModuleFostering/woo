@@ -12,7 +12,7 @@ if(is_numeric($data_key) === false) {
 	$lang = substr(Mage::getStoreConfig('general/locale/code'), 0, 2);
 	$name = Mage::getStoreConfig('trans_email/ident_general/name');
 
-	error_log("Updating to woomio plugin 1.1.6 from 1.0.12. Email: " . $email . "; Domain: " . $domain . "; Lang: " . $lang . "; Name: " . $name);
+	error_log("Updating to woomio plugin 1.1.7 from 1.0.12. Email: " . $email . "; Domain: " . $domain . "; Lang: " . $lang . "; Name: " . $name);
 
 	$setup_callback_url = 'https://www.woomio.com/endpoints/RetailerSignup?name=' . urlencode($name) . '&domain=' . urlencode($domain) . '&country=' . urlencode($lang) . '&email=' . urlencode($email) . '&platform=1';
 
