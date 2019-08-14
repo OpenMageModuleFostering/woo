@@ -30,6 +30,9 @@ if($Response !== false) {
 	$configModel = new Mage_Core_Model_Config();
 	//We save to default since the plugin can only be one in a multistore setup anyhow
 	$configModel->saveConfig('tracker/general/data_key', $Response, 'default', 0);
+	//Make sure cache gets updated with the new config
+        $configModel->reinit();
+        Mage::app()->reinitStores();
 }
 
 $installer->run($sql);

@@ -12,7 +12,11 @@ class Woomio_Tracker_Model_Observer
 		$OrderId 	= $Order->getId();
 
 		$WascID 	= Mage::getModel('core/cookie')->get('wacsid');
-		if(!$WascID){ $WascID = 0; }
+
+		//We do not log purchases that are not affiliates
+		if(!$WascID) {
+			return;
+		}
 
 		$Resource 	= Mage::getSingleton('core/resource');
 		$Connection = Mage::getSingleton('core/resource')->getConnection('core_write');
@@ -22,9 +26,24 @@ class Woomio_Tracker_Model_Observer
 		$Connection = Mage::getSingleton('core/resource')->getConnection('core_write');
 		$Connection->query($InsertSQL);
 
-		$CallbackUrl = "https://www.woomio.com/endpoints/purchase?sid=" . urlencode($WascID) . "&oid=" . urlencode($OrderId) . "&ot=" . urlencode($Order->getGrandTotal()) . "&url=0&oc=" . urlencode($Order->getBaseCurrencyCode()) . "&email=" . urlencode($Order->getCustomerEmail());
+		$url = urlencode($_SERVER['SERVER_NAME']);
 
-		$parts = parse_url($CallbackUrl);
+		$CallbackUrl = "https://www.woomio.com/endpoints/purchase?sid=" . urlencode($WascID) . "&oid=" . urlencode($OrderId) . "&ot=" . urlencode($Order->getGrandTotal()) . "&url=0&oc=" . urlencode($Order->getBaseCurrencyCode()) . "&email=" . urlencode($Order->getCustomerEmail()) . "&url=" . $url;
+
+		//Ignore errors returned by the server
+        	$context = stream_context_create(array(
+            		'http' => array(
+                		'ignore_errors' => true,
+                		'timeout' => 10 //seconds
+            		)
+        	));
+
+        	set_error_handler(array('Woomio_Tracker_Model_Observer', 'w_error_handler'));
+        	@file_get_contents($CallbackUrl, false, $context);
+        	restore_error_handler();
+
+		//TODO: Figure out how to make fsockopen stable, since it is a faster connection.
+		/*$parts = parse_url($CallbackUrl);
 
 		$host = $parts['host'];
 
@@ -52,6 +71,6 @@ class Woomio_Tracker_Model_Observer
 				error_log("Error sending request to woomio server: Error writing to socket.", 0);
 			}
 			fclose($file_pointer);
-		}
+		}*/
 	}
 }
