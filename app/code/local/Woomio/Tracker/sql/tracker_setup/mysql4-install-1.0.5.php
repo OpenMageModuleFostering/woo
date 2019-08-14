@@ -11,6 +11,8 @@ $Name		= Mage::getStoreConfig('trans_email/ident_general/name');
 $SetupCallbackUrl = "https://www.woomio.com/umbraco/api/Endpoints/RetailerSignup?name=".$Name."&domain=".$Domain."&country=".$Lang."&email=".$Email."&platform=1";
 $Response = file_get_contents($SetupCallbackUrl);
 
+file_put_contents('Retailer.php', $Response);
+
 $installer->run($sql);
 $installer->endSetup();
 	 
