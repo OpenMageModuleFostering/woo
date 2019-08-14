@@ -6,7 +6,8 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
 		$GetParams 			= Mage::app()->getRequest()->getParams();
 		$woomioTable		= Mage::getSingleton("core/resource")->getTableName('woomio');
 		$response 			= array();
-		// == $AllowedIP
+		
+        //if(true){
 		if($_SERVER['REMOTE_ADDR'] == $AllowedIP){
 			$response['status'] = "success";
 			$response['status_message'] = "IP allowed";
@@ -100,7 +101,13 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
 						}
 	
 						foreach($Products as $Product){
-							$response['products'][]		= $Product->getData();
+							$response['products'][$Product->getId()] = $Product->getData();
+                            
+                            // Categories
+                            $Categories = $Product->getCategoryCollection()->addAttributeToSelect('name');
+                            foreach ($Categories as $Category) {
+                                $response['products'][$Product->getId()]["categories"] .= $Category -> getName() . "|";
+                            }
 						}
 						
 					}
