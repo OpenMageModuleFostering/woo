@@ -3,7 +3,9 @@
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
-    "description": "Woomio provides increased exposure for retailers through enabling customers to share their purchases on social media.",
+    "description": "Woomio provides increased exposure for retailers through enabling customers to share their purchases on social media.
+
+Utilise the power of your customers' recommendations",
     "authors": [
     {
         "name": "Woomio",
