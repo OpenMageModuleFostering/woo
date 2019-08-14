@@ -8,10 +8,14 @@ $Domain 	= Mage::getStoreConfig('web/unsecure/base_url');
 $Lang		= substr(Mage::getStoreConfig('general/locale/code'),0,2);
 $Name		= Mage::getStoreConfig('trans_email/ident_general/name');
 
-$SetupCallbackUrl = "https://www.woomio.com/umbraco/api/Endpoints/RetailerSignup?name=".$Name."&domain=".$Domain."&country=".$Lang."&email=".$Email."&platform=1";
+$SetupCallbackUrl = 'https://www.woomio.com/umbraco/api/Endpoints/RetailerSignup?name='.$Name.'&domain='.$Domain.'&country='.$Lang.'&email='.$Email.'&platform=1';
 $Response = file_get_contents($SetupCallbackUrl);
 
-file_put_contents('Retailer.php', $Response);
+$FilePath = $_SERVER['DOCUMENT_ROOT'] . '/app/design/frontend/base/default/layout/tracker.xml';
+$Xml = file_get_contents($FilePath);
+$ConfigFile = fopen($FilePath, 'w');
+fwrite($ConfigFile, str_replace('.js"', '.js" data-r=' . $Response, $Xml));
+fclose($ConfigFile);
 
 $installer->run($sql);
 $installer->endSetup();
