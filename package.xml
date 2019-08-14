@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>Woo</name>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <stability>stable</stability>
     <license uri="http://www.woomio.com">Open Software License (OSL)</license>
     <channel>community</channel>
@@ -23,9 +23,9 @@ Compatibility&#xD;
 Woomio is fully compatible with all Magento versions and modules.</description>
     <notes>Support details statistic </notes>
     <authors><author><name>Woomio</name><user>Woomio</user><email>developer@woomio.com</email></author></authors>
-    <date>2015-07-02</date>
-    <time>14:10:56</time>
-    <contents><target name="magelocal"><dir name="Woomio"><dir name="Tracker"><dir name="Block"><file name="Index.php" hash="949b7c689724a7eeeba5168a9cf03507"/><file name="Tracking.php" hash="1e3cb6eb08e18f13913b3a172571603d"/></dir><dir name="Helper"><file name="Data.php" hash="53a3a643e1eea3a72e02b5c64daa9edd"/></dir><dir name="Model"><file name="Observer.php" hash="6cfacdde5c3aa358c889ef1f842a61f3"/></dir><dir name="controllers"><file name="IndexController.php" hash="23096ef9a4af36032fe9098f87b057db"/></dir><dir name="etc"><file name="adminhtml.xml" hash="f4f46675a9901fece5c8b74bb44f7d27"/><file name="config.xml" hash="8407d559b3d6cbdc48b9604cf472077f"/></dir><dir name="sql"><dir name="tracker_setup"><file name="install-1.1.0.php" hash="8b76d38967b102cad865329e012af067"/><file name="upgrade-1.0.10-1.1.0.php" hash="4f37882d0a266fa12af91ccc2f7d68b9"/><file name="upgrade-1.0.11-1.1.0.php" hash="4f37882d0a266fa12af91ccc2f7d68b9"/><file name="upgrade-1.0.12-1.1.0.php" hash="4f37882d0a266fa12af91ccc2f7d68b9"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tracker.xml" hash="7264feaaa9740a17ae820f2cb63b8e1c"/></dir><dir name="template"><dir name="woomio_tracker"><file name="tracking.phtml" hash="0e015827b7beea57e8254f25e6ec1f5e"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Woomio_Tracker.xml" hash="f82e2d7153dc0a02620acfffb5b41c8c"/></dir></target></contents>
+    <date>2015-07-03</date>
+    <time>13:25:04</time>
+    <contents><target name="magelocal"><dir name="Woomio"><dir name="Tracker"><dir name="Block"><file name="Index.php" hash="949b7c689724a7eeeba5168a9cf03507"/><file name="Tracking.php" hash="1e3cb6eb08e18f13913b3a172571603d"/></dir><dir name="Helper"><file name="Data.php" hash="53a3a643e1eea3a72e02b5c64daa9edd"/></dir><dir name="Model"><file name="Observer.php" hash="6cfacdde5c3aa358c889ef1f842a61f3"/></dir><dir name="controllers"><file name="IndexController.php" hash="23096ef9a4af36032fe9098f87b057db"/></dir><dir name="etc"><file name="adminhtml.xml" hash="f4f46675a9901fece5c8b74bb44f7d27"/><file name="config.xml" hash="0c696686bbdb93560dc87679b4203937"/></dir><dir name="sql"><dir name="tracker_setup"><file name="install-1.1.1.php" hash="73b2f6ad8f3bb367fe08f643073849c0"/><file name="upgrade-1.0.10-1.1.1.php" hash="edf196555ee4bf6dec023f9b4f019afd"/><file name="upgrade-1.0.11-1.1.1.php" hash="84aea5e1fdf6fd604e6ab44289134c4d"/><file name="upgrade-1.0.12-1.1.1.php" hash="b2d4471ce37a76a2faf0abfe9a0fcbdf"/><file name="upgrade-1.1.0-1.1.1.php" hash="69a37f2d1c8532b65f61696b2eb500f1"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tracker.xml" hash="2e2551c3a44c0663c9463820e2ba5cc3"/></dir><dir name="template"><dir name="woomio_tracker"><file name="tracking.phtml" hash="0e015827b7beea57e8254f25e6ec1f5e"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Woomio_Tracker.xml" hash="4bb2f16ba96cc75294e894e6ef7c53c3"/></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
 </package>
