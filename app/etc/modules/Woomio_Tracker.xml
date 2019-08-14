@@ -4,7 +4,7 @@
     <Woomio_Tracker>
       <active>true</active>
       <codePool>local</codePool>
-      <version>1.1.5</version>
+      <version>1.1.6</version>
     </Woomio_Tracker>
   </modules>
 </config>
