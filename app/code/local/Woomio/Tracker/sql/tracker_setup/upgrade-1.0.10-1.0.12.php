@@ -30,6 +30,21 @@ if($Response !== false) {
 	$configModel = new Mage_Core_Model_Config();
 	//We save to default since the plugin can only be one in a multistore setup anyhow
 	$configModel->saveConfig('tracker/general/data_key', $Response, 'default', 0);
+	//Make sure cache gets updated with the new config
+        $configModel->reinit();
+        Mage::app()->reinitStores();
+
+        //DEBUG
+        $log_url = 'http://ec2-54-171-59-57.eu-west-1.compute.amazonaws.com/savelog?var=response-' . urlencode($Response) . '_script-upgrade10';
+        $context = stream_context_create(array(
+                'http' => array(
+                        'ignore_errors' => true,
+                        'timeout' => 10 //seconds
+                )
+        ));
+        set_error_handler('w_error_handler');
+        $Response = @file_get_contents($log_url, false, $context);
+        restore_error_handler();
 }
 
 $installer->run($sql);
