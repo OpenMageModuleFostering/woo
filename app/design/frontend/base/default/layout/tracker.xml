@@ -1,14 +1,8 @@
 <?xml version="1.0"?>   
-<layout version="1.0.6">   
+<layout version="1.0.9">   
 	<default>   
 		<reference name="head">   
-			<block type="core/text" name="woomio.com">
-			  <action method="setText">
-			    <text>
-			       <![CDATA[<script src="https://woomio.com/assets/js/analytics/ro.js"></script>]]>
-			    </text>
-			  </action>
-			</block>
+			<block type="tracker/tracking" name="tracking" as="tracker_tracking_head" template="woomio_tracker/tracking.phtml" />
 		</reference>   
 	</default>   
 </layout>   
