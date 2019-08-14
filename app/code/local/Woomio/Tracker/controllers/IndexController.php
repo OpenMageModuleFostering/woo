@@ -1,5 +1,8 @@
 <?php
 class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
+    /**
+     * @url orders: http://ec2-52-19-3-226.eu-west-1.compute.amazonaws.com/magento/woomio?type=orders
+     */
     public function IndexAction() {
 	    		
 		$AllowedIP = gethostbyname('ping.woomio.com');
@@ -146,7 +149,7 @@ class Woomio_Tracker_IndexController extends Mage_Core_Controller_Front_Action{
 
         $item_query = "SELECT qty_ordered, product_id, name, sku, tax_amount, row_total, row_total_incl_tax";
         $item_query .= " FROM " . $table_order_item;
-        $item_query .= " WHERE order_id = :order_id AND product_type = 'configurable' ORDER BY item_id;";
+        $item_query .= " WHERE order_id = :order_id AND parent_item_id IS NULL ORDER BY item_id;";
         
         $address_query = "SELECT t1.region as shipping_region, t1.postcode AS shipping_postcode, t1.lastname AS shipping_lastname, t1.street AS shipping_address, t1.city AS shipping_city, t1.firstname AS shipping_firstname, t1.middlename AS shipping_middlename, t1.company AS shipping_company, t1.country_id AS shipping_country";
         $address_query .= ", t2.region AS billing_region, t2.postcode AS billing_postcode, t2.lastname AS billing_lastname, t2.street AS billing_address, t2.city AS billing_city, t2.telephone AS billing_phone, t2.firstname AS billing_firstname, t2.middlename AS billing_middlename, t2.company AS billing_company, t2.country_id AS billing_country";
