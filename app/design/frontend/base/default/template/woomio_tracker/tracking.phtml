@@ -1,0 +1,8 @@
+<?php
+	$DATAR = Mage::getStoreConfig('tracker/general/data_key');
+?>
+<?php if($DATAR):?>
+	<script src="https://woomio.com/assets/js/analytics/ro.js" data-r="<?php echo $DATAR;?>"></script>
+<?php else: ?>
+	<script src="https://woomio.com/assets/js/analytics/ro.js"></script>
+<?php endif; ?>
