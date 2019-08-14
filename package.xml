@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>Woo</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <stability>stable</stability>
     <license>Open Software License (OSL)</license>
     <channel>community</channel>
@@ -26,9 +26,9 @@ Compatibility&#xD;
 Woomio is fully compatible with all Magento versions and modules.</description>
     <notes>Initial version of Woomio</notes>
     <authors><author><name>Woomio</name><user>Woomio</user><email>developer@woomio.com</email></author></authors>
-    <date>2015-04-13</date>
-    <time>11:08:20</time>
-    <contents><target name="magelocal"><dir name="Woomio"><dir name="Tracker"><dir name="Block"><file name="Index.php" hash="949b7c689724a7eeeba5168a9cf03507"/></dir><dir name="Helper"><file name="Data.php" hash="53a3a643e1eea3a72e02b5c64daa9edd"/></dir><dir name="Model"><file name="Observer.php" hash="855bd53491c9c6b37178d7565d7e2e1a"/></dir><dir name="controllers"><file name="IndexController.php" hash="f18df080c87ae5361658056a9ea81240"/></dir><dir name="etc"><file name="config.xml" hash="0da67848c98a646d966e8eede9291b25"/></dir><dir name="sql"><dir name="tracker_setup"><file name="mysql4-install-0.1.0.php" hash="b7ff9e8463ef8abb150d20f26e56d8f7"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tracker.xml" hash="07379cce1ea1287e2b20b8a430016729"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Woomio_Tracker.xml" hash="1b783bbe83a1689af0988765156f0a48"/></dir></target></contents>
+    <date>2015-04-22</date>
+    <time>14:19:40</time>
+    <contents><target name="magelocal"><dir name="Woomio"><dir name="Tracker"><dir name="Block"><file name="Index.php" hash="949b7c689724a7eeeba5168a9cf03507"/></dir><dir name="Helper"><file name="Data.php" hash="53a3a643e1eea3a72e02b5c64daa9edd"/></dir><dir name="Model"><file name="Observer.php" hash="855bd53491c9c6b37178d7565d7e2e1a"/></dir><dir name="controllers"><file name="IndexController.php" hash="f18df080c87ae5361658056a9ea81240"/></dir><dir name="etc"><file name="config.xml" hash="916c2901e9885ea5b1025d3ae336a66e"/></dir><dir name="sql"><dir name="tracker_setup"><file name="mysql4-install-1.0.4.php" hash="c731b614f102aa8c36081e21ac6db15b"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tracker.xml" hash="d7c5873d043e04e4c44bbf8dcb389e66"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Woomio_Tracker.xml" hash="21e4a547a75fcd9a353b20a8729a6c0c"/></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
 </package>
