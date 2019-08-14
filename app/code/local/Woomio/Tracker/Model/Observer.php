@@ -6,7 +6,7 @@ class Woomio_Tracker_Model_Observer
 		return true;
 	}
 
-	public function setWascid(Varien_Event_Observer $observer)
+	public function registerOrder(Varien_Event_Observer $observer)
 	{
 		$Order 		= $observer->getEvent()->getOrder();
 		$OrderId 	= $Order->getId();
@@ -28,7 +28,7 @@ class Woomio_Tracker_Model_Observer
 
 		$url = urlencode($_SERVER['SERVER_NAME']);
 
-		$CallbackUrl = "https://www.woomio.com/endpoints/purchase?sid=" . urlencode($WascID) . "&oid=" . urlencode($OrderId) . "&ot=" . urlencode($Order->getGrandTotal()) . "&url=0&oc=" . urlencode($Order->getBaseCurrencyCode()) . "&email=" . urlencode($Order->getCustomerEmail()) . "&url=" . $url;
+		$CallbackUrl = "https://www.woomio.com/endpoints/purchase?sid=" . urlencode($WascID) . "&oid=" . urlencode($OrderId) . "&ot=" . urlencode($Order->getSubtotal()) . "&url=0&oc=" . urlencode($Order->getBaseCurrencyCode()) . "&email=" . urlencode($Order->getCustomerEmail()) . "&url=" . $url;
 
 		//Ignore errors returned by the server
         	$context = stream_context_create(array(

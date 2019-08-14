@@ -1,5 +1,5 @@
 <?php
-function w_error_handler_111($errno, $errstr, $errfile, $errline, $errcontext) {
+function w_error_handler_12($errno, $errstr, $errfile, $errline, $errcontext) {
 	error_log('An error occurred registering with woomio backend, and was bypassed. ' . $errno . ': ' . $errstr);
 	return true;
 }
@@ -18,7 +18,7 @@ if(is_numeric($data_key) === false) {
 	$Lang		= substr(Mage::getStoreConfig('general/locale/code'),0,2);
 	$Name		= Mage::getStoreConfig('trans_email/ident_general/name');
 
-	error_log("Updating to woomio plugin 1.1.3 from 1.1.1. Email: " . $Email . "; Domain: " . $Domain . "; Lang: " . $Lang . "; Name: " . $Name);
+	error_log("Updating to woomio plugin 1.1.4 from 1.0.12. Email: " . $Email . "; Domain: " . $Domain . "; Lang: " . $Lang . "; Name: " . $Name);
 
 	$SetupCallbackUrl = 'https://www.woomio.com/endpoints/RetailerSignup?name=' . urlencode($Name) . '&domain=' . urlencode($Domain) . '&country=' . urlencode($Lang) . '&email=' . urlencode($Email) . '&platform=1';
 
@@ -27,7 +27,7 @@ if(is_numeric($data_key) === false) {
 		'http' => array('ignore_errors' => true)
 	));
 
-	set_error_handler('w_error_handler_111');
+	set_error_handler('w_error_handler_12');
 	$Response = @file_get_contents($SetupCallbackUrl, false, $context);
 	restore_error_handler();
 

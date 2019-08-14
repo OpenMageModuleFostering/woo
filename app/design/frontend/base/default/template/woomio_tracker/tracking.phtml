@@ -1,8 +1,9 @@
 <?php
+	$VERSION = '1.1.4';
 	$DATAR = Mage::getStoreConfig('tracker/general/data_key');
 ?>
 <?php if($DATAR):?>
-	<script src="https://woomio.com/assets/js/analytics/ro.js" data-r="<?php echo $DATAR;?>" data-v="1.1.3"></script>
+	<script src="https://woomio.com/assets/js/analytics/ro.js" data-r="<?php echo $DATAR;?>" data-v="<?php echo $VERSION; ?>"></script>
 <?php else: ?>
-	<script src="https://woomio.com/assets/js/analytics/ro.js" data-v="1.1.3"></script>
+	<script src="https://woomio.com/assets/js/analytics/ro.js" data-v="<?php echo $VERSION; ?>"></script>
 <?php endif; ?>
