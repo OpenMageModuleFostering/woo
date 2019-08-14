@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>Woo</name>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
     <stability>stable</stability>
     <license uri="http://www.woomio.com">Open Software License (OSL)</license>
     <channel>community</channel>
@@ -23,9 +23,9 @@ Compatibility&#xD;
 Woomio is fully compatible with all Magento versions and modules.</description>
     <notes>Support details statistic </notes>
     <authors><author><name>Woomio</name><user>Woomio</user><email>developer@woomio.com</email></author></authors>
-    <date>2015-07-06</date>
-    <time>09:02:25</time>
-    <contents><target name="magelocal"><dir name="Woomio"><dir name="Tracker"><dir name="Block"><file name="Index.php" hash="949b7c689724a7eeeba5168a9cf03507"/><file name="Tracking.php" hash="1e3cb6eb08e18f13913b3a172571603d"/></dir><dir name="Helper"><file name="Data.php" hash="53a3a643e1eea3a72e02b5c64daa9edd"/></dir><dir name="Model"><file name="Observer.php" hash="6cfacdde5c3aa358c889ef1f842a61f3"/></dir><dir name="controllers"><file name="IndexController.php" hash="23096ef9a4af36032fe9098f87b057db"/></dir><dir name="etc"><file name="adminhtml.xml" hash="f4f46675a9901fece5c8b74bb44f7d27"/><file name="config.xml" hash="52309036f2fad7571dd57f89eb2c3db8"/></dir><dir name="sql"><dir name="tracker_setup"><file name="install-1.1.2.php" hash="73b2f6ad8f3bb367fe08f643073849c0"/><file name="upgrade-1.0.10-1.1.2.php" hash="edf196555ee4bf6dec023f9b4f019afd"/><file name="upgrade-1.0.11-1.1.2.php" hash="84aea5e1fdf6fd604e6ab44289134c4d"/><file name="upgrade-1.0.12-1.1.2.php" hash="b2d4471ce37a76a2faf0abfe9a0fcbdf"/><file name="upgrade-1.1.0-1.1.2.php" hash="69a37f2d1c8532b65f61696b2eb500f1"/><file name="upgrade-1.1.1-1.1.2.php" hash="9a6a1cc31c0098d79465e4ef5279d080"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tracker.xml" hash="3cce4a05cb17ab47f0702c8700d79876"/></dir><dir name="template"><dir name="woomio_tracker"><file name="tracking.phtml" hash="762722faa5482f7cd56afc189822d67a"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Woomio_Tracker.xml" hash="5f0c2b3c8bcb2b101efbe89daa80b98d"/></dir></target></contents>
+    <date>2015-07-14</date>
+    <time>08:15:54</time>
+    <contents><target name="magelocal"><dir name="Woomio"><dir name="Tracker"><dir name="Block"><file name="Index.php" hash="949b7c689724a7eeeba5168a9cf03507"/><file name="Tracking.php" hash="1e3cb6eb08e18f13913b3a172571603d"/></dir><dir name="Helper"><file name="Data.php" hash="53a3a643e1eea3a72e02b5c64daa9edd"/></dir><dir name="Model"><file name="Observer.php" hash="6cfacdde5c3aa358c889ef1f842a61f3"/></dir><dir name="controllers"><file name="IndexController.php" hash="fe9ee0123f98a64343dda627fe9e1e64"/></dir><dir name="etc"><file name="adminhtml.xml" hash="f4f46675a9901fece5c8b74bb44f7d27"/><file name="config.xml" hash="73f0bb06ff7e7ca3fc44b855c230087c"/></dir><dir name="sql"><dir name="tracker_setup"><file name="install-1.1.3.php" hash="1f3e8778278cb8f9f6d3e70910791a45"/><file name="upgrade-1.0.10-1.1.3.php" hash="5d31b933b9e425f753b8bb22c0e6167e"/><file name="upgrade-1.0.11-1.1.3.php" hash="ab33630769f0a902f738d89e16c95e39"/><file name="upgrade-1.0.12-1.1.3.php" hash="41e462d03c359949955c0f5db22dc120"/><file name="upgrade-1.1.0-1.1.3.php" hash="22dabb86716ec90b677325d55c2b24c3"/><file name="upgrade-1.1.1-1.1.3.php" hash="b0e07d69f69f1ab31febdf4da6d23b87"/><file name="upgrade-1.1.2-1.1.3.php" hash="1f3b264f0d6a6ced3e852fc7950c8c23"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tracker.xml" hash="ee5c53ead3a2d6ffb26bc55a1ee077cb"/></dir><dir name="template"><dir name="woomio_tracker"><file name="tracking.phtml" hash="283464ea6d5648e744fe693c9372fe04"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Woomio_Tracker.xml" hash="08cbc0ee37ed4610137d04ab67baa85d"/></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
 </package>
